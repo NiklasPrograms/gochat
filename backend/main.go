@@ -13,6 +13,7 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Fprintf(w, "%+V\n", err)
 	}
+
 	go websocket.Writer(ws)
 	websocket.Reader(ws)
 }
