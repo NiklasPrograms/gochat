@@ -1,57 +1,31 @@
 package main
 
-import (
-	"fmt"
-	"log"
-	"net/http"
+import "fmt"
 
-	"github.com/gorilla/websocket"
-)
+// "fmt"
+// "net/http"
 
-var upgrader = websocket.Upgrader{
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
-	CheckOrigin:     func(r *http.Request) bool { return true },
-}
+// func serveWs(w http.ResponseWriter, r *http.Request) {
+// 	fmt.Println(r.Host)
 
-func reader(conn *websocket.Conn) {
-	for {
-		messageType, p, err := conn.ReadMessage()
-		if err != nil {
-			log.Println(err)
-			return
-		}
+// 	ws, err := upgrader.Upgrade(w, r, nil)
+// 	if err != nil {
+// 		log.Println(err)
+// 	}
 
-		fmt.Print(string(p))
+// 	reader(ws)
+// }
 
-		if err := conn.WriteMessage(messageType, p); err != nil {
-			log.Println(err)
-			return
-		}
-	}
-}
+// func setupRoutes() {
+// 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+// 		fmt.Fprintf(w, "Simple Server with ws connection")
+// 	})
 
-func serveWs(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r.Host)
-
-	ws, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
-		log.Println(err)
-	}
-
-	reader(ws)
-}
-
-func setupRoutes() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Simple Server with ws connection")
-	})
-
-	http.HandleFunc("/ws", serveWs)
-}
+// 	http.HandleFunc("/ws", serveWs)
+// }
 
 func main() {
 	fmt.Println("Chat app v0.02")
-	setupRoutes()
-	http.ListenAndServe(":8080", nil)
+	// setupRoutes()
+	// http.ListenAndServe(":8080", nil)
 }
