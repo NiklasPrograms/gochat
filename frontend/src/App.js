@@ -8,14 +8,9 @@ import ChatInput from './components/ChatInput/ChatInput';
 const App = () => {
   const [chatHistory, setChatHistory] = useState([]);
 
-  // On mount
   useEffect(() => {
-    connect((msg) => {
-      console.log("New Message");
-      setChatHistory(prevState => {
-        return [...prevState, msg]
-      })
-      console.log(chatHistory);
+    connect(msg => {
+      setChatHistory(prevState => [...prevState, msg])
     });
   })
 

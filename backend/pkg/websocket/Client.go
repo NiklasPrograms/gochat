@@ -9,12 +9,14 @@ import (
 
 type Client struct {
 	ID   string
+	name string
 	Conn *websocket.Conn
 	Pool *Pool
 }
 
 type Message struct {
-	Type int    `json:"type"`
+	Type int `json:"type"`
+	// author string
 	Body string `json:"body"`
 }
 
