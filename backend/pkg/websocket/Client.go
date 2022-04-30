@@ -9,15 +9,15 @@ import (
 
 type Client struct {
 	ID   string
-	name string
+	Name string
 	Conn *websocket.Conn
 	Pool *Pool
 }
 
 type Message struct {
-	Type int `json:"type"`
-	// author string
-	Body string `json:"body"`
+	Type   int `json:"type"`
+	author string
+	Body   string `json:"body"`
 }
 
 func (c *Client) Read() {

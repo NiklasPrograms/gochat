@@ -26,9 +26,11 @@ func (pool *Pool) Start() {
 
 			fmt.Println("Size of Connection Pool: ", len(pool.Clients))
 
+			var clientName := client.Name
+
 			for client := range pool.Clients {
 				fmt.Println(client)
-				client.Conn.WriteJSON(Message{Type: 1, Body: "New User Joined..."})
+				client.Conn.WriteJSON(Message{Type: 1, Author: clientName, Body: "New user joined..."})
 			}
 		case client := <-pool.Unregister:
 			delete(pool.Clients, client)
