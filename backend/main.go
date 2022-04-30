@@ -1,31 +1,28 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
 
-// "fmt"
-// "net/http"
+	"github.com/NiklasPrograms/gochat/pkg/websocket"
+)
 
-// func serveWs(w http.ResponseWriter, r *http.Request) {
-// 	fmt.Println(r.Host)
+func serveWs(w http.ResponseWriter, r *http.Request) {
+	ws, err := websocket.Upgrade(w, r)
 
-// 	ws, err := upgrader.Upgrade(w, r, nil)
-// 	if err != nil {
-// 		log.Println(err)
-// 	}
+	if err != nil {
+		fmt.Fprintf(w, "%+V\n", err)
+	}
+	go websocket.Writer(ws)
+	websocket.Reader(ws)
+}
 
-// 	reader(ws)
-// }
-
-// func setupRoutes() {
-// 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-// 		fmt.Fprintf(w, "Simple Server with ws connection")
-// 	})
-
-// 	http.HandleFunc("/ws", serveWs)
-// }
+func setupRoutes() {
+	http.HandleFunc("/ws", serveWs)
+}
 
 func main() {
-	fmt.Println("Chat app v0.02")
-	// setupRoutes()
-	// http.ListenAndServe(":8080", nil)
+	fmt.Println("Distributed Chat App v0.03")
+	setupRoutes()
+	http.ListenAndServe(":8080", nil)
 }

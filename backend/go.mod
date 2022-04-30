@@ -1,4 +1,4 @@
-module github.com/TutorialEdge/realtime-chat-go-react
+module github.com/NiklasPrograms/gochat
 
 go 1.18
 
