@@ -11,7 +11,7 @@ const Message = (props) => {
 
     return(
         <div className="message">
-            {message.body}
+            {`${message.author}: ${message.body}`}
         </div>
     );
 }

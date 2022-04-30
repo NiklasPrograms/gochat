@@ -15,8 +15,8 @@ type Client struct {
 }
 
 type Message struct {
-	Type   int `json:"type"`
-	author string
+	Type   int    `json:"type"`
+	Author string `json:"author"`
 	Body   string `json:"body"`
 }
 
