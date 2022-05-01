@@ -10,9 +10,6 @@ import (
 func serveWs(pool *websocket.Pool, w http.ResponseWriter, r *http.Request) {
 	fmt.Println("WebSocket Endpoint Hit")
 
-	userName := r.URL.Query().Get("test")
-	fmt.Println(userName)
-
 	conn, err := websocket.Upgrade(w, r)
 
 	if err != nil {
@@ -20,7 +17,7 @@ func serveWs(pool *websocket.Pool, w http.ResponseWriter, r *http.Request) {
 	}
 
 	client := &websocket.Client{
-		Name: "Niklas",
+		Name: "?????",
 		Conn: conn,
 		Pool: pool,
 	}
